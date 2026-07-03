@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithmic Principles</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#faf8f5;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left,#d8b18b45,transparent 35%),
+    radial-gradient(circle at bottom right,#8b5e3c22,transparent 40%);
+    z-index:-1;
+}
+
+/* Progress Bar */
+
+.progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:5px;
+    width:0%;
+    background:#8b5e3c;
+    z-index:999;
+    transition:.5s;
+}
+
+/* Slides */
+
+.presentation{
+    display:flex;
+    height:100vh;
+    transition:transform .8s ease;
+}
+
+.slide{
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    flex-shrink:0;
+    padding:40px;
+}
+
+/* Card */
+
+.card{
+
+    width:70%;
+    min-height:70vh;
+
+    background:white;
+
+    border-radius:22px;
+
+    border-left:7px solid #8b5e3c;
+
+    padding:45px;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+    animation:fadeUp .8s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+h1{
+
+    color:#6b4226;
+    font-size:50px;
+    margin-bottom:20px;
+
+}
+
+h2{
+
+    color:#6b4226;
+    font-size:40px;
+    margin-bottom:20px;
+
+}
+
+.icon{
+
+    font-size:75px;
+    margin:15px 0 25px;
+
+    animation:float 3s infinite ease-in-out;
+
+}
+
+.subtitle{
+
+    font-size:24px;
+    color:#555;
+    line-height:1.6;
+
+}
+
+ul{
+
+    margin-top:10px;
+    font-size:23px;
+    line-height:2;
+
+}
+
+.highlight{
+
+    margin-top:25px;
+    padding:18px;
+
+    background:#f5ede6;
+
+    border-left:5px solid #8b5e3c;
+
+    border-radius:10px;
+
+    font-size:20px;
+
+}
+
+.buttons{
+
+    display:flex;
+    justify-content:space-between;
+    margin-top:40px;
+
+}
+
+button{
+
+    padding:14px 30px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    background:#8b5e3c;
+
+    color:white;
+
+    font-size:17px;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+
+}
+
+.navHint{
+
+    position:fixed;
+    bottom:20px;
+    right:25px;
+    color:#666;
+    font-size:15px;
+}
+
+@keyframes float{
+
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(50px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="progress"></div>
+
+<div class="presentation">
+
+<!-- Slide 1 -->
+
+<section class="slide">
+
+<div class="card">
+
+<h1>Algorithmic Principles</h1>
+
+<div class="icon">🧠</div>
+
+<p class="subtitle">
+Write Better Code, Not Just Working Code.
+</p>
+
+</div>
+
+</section>
+
+<!-- Slide 2 -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>End User Experience</h2>
+
+<div class="icon">😊</div>
+
+<ul>
+
+<li>Easy to use</li>
+
+<li>Simple interface</li>
+
+<li>Fast & reliable</li>
+
+</ul>
+
+<div class="highlight">
+
+Goal: Build software that people enjoy using.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Slide 3 -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Meaningful Variable Names</h2>
+
+<div class="icon">🏷️</div>
+
+<ul>
+
+<li>❌ a, x, temp</li>
+
+<li>✅ studentName</li>
+
+<li>✅ totalMarks</li>
+
+</ul>
+
+<div class="highlight">
+
+Good names improve readability.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Slide 4 -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Coding Style</h2>
+
+<div class="icon">📄</div>
+
+<ul>
+
+<li>Proper indentation</li>
+
+<li>Consistent formatting</li>
+
+<li>Readable code</li>
+
+</ul>
+
+<div class="highlight">
+
+Clean code is easier to maintain.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Slide 5 -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Correctness</h2>
+
+<div class="icon">✔️</div>
+
+<ul>
+
+<li>Correct output</li>
+
+<li>Handles all inputs</li>
+
+<li>No logical errors</li>
+
+</ul>
+
+<div class="highlight">
+
+Correctness comes before optimization.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Slide 6 -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Multiple Solutions</h2>
+
+<div class="icon">🧩</div>
+
+<ul>
+
+<li>One problem → Many solutions</li>
+
+<li>Compare speed</li>
+
+<li>Compare memory</li>
+
+<li>Choose the best one</li>
+
+</ul>
+
+<div class="highlight">
+
+<b>Trade-off:</b><br><br>
+
+⚡ Faster → More Memory<br><br>
+
+💾 Less Memory → Slower
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Slide 7 -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>No Duplicate Code</h2>
+
+<div class="icon">♻️</div>
+
+<ul>
+
+<li>Create functions</li>
+
+<li>Reuse code</li>
+
+<li>Avoid copying</li>
+
+</ul>
+
+</div>
+
+</section>
+
+<!-- Slide 8 -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Optimization</h2>
+
+<div class="icon">🚀</div>
+
+<ul>
+
+<li>Improve speed</li>
+
+<li>Reduce memory</li>
+
+<li>Increase efficiency</li>
+
+</ul>
+
+<div class="highlight">
+
+Optimize only after the program works correctly.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Final Slide -->
+
+<section class="slide">
+
+<div class="card" style="text-align:center;">
+
+<h1>Chapter Complete</h1>
+
+<div class="icon">🎉</div>
+
+<p class="subtitle">
+
+Algorithmic Principles Completed
+
+</p>
+
+<div class="buttons">
+
+<button onclick="location.href='index.html'">
+
+🏠 Home
+
+</button>
+
+<button onclick="location.href='git-github.html'">
+
+Next Chapter →
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<div class="navHint">
+⬅ ➡ Arrow Keys &nbsp;|&nbsp; Mouse Wheel
+</div>
+
+<script>
+
+const presentation=document.querySelector(".presentation");
+const slides=document.querySelectorAll(".slide");
+const progress=document.querySelector(".progress");
+
+let current=0;
+let lock=false;
+
+function updateSlide(){
+
+    presentation.style.transform=
+    `translateX(-${current*window.innerWidth}px)`;
+
+    progress.style.width=
+    ((current)/(slides.length-1))*100+"%";
+
+}
+
+function next(){
+
+    if(current<slides.length-1){
+
+        current++;
+
+        updateSlide();
+
+    }
+
+}
+
+function prev(){
+
+    if(current>0){
+
+        current--;
+
+        updateSlide();
+
+    }
+
+}
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="ArrowRight") next();
+
+    if(e.key==="ArrowLeft") prev();
+
+});
+
+window.addEventListener("wheel",(e)=>{
+
+    if(lock) return;
+
+    lock=true;
+
+    if(e.deltaY>0){
+
+        next();
+
+    }else{
+
+        prev();
+
+    }
+
+    setTimeout(()=>lock=false,700);
+
+});
+
+window.addEventListener("resize",updateSlide);
+
+updateSlide();
+
+</script>
+
+</body>
+</html>

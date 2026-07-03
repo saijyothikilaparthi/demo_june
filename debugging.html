@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debugging with LLDB</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+body{
+background:#faf8f5;
+color:#222;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#d9b38230,transparent 35%),
+radial-gradient(circle at bottom right,#8b5e3c18,transparent 40%);
+z-index:-1;
+}
+
+header{
+background:white;
+padding:25px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:4px solid #8b5e3c;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+header h1{
+color:#6b4226;
+font-size:34px;
+}
+
+nav button{
+padding:10px 20px;
+margin-left:10px;
+border:none;
+border-radius:8px;
+background:#8b5e3c;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+nav button:hover{
+background:#6b4226;
+transform:translateY(-3px);
+}
+
+.container{
+max-width:1200px;
+margin:40px auto;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:18px;
+border-left:6px solid #8b5e3c;
+box-shadow:0 12px 25px rgba(0,0,0,.08);
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.card h2{
+color:#6b4226;
+margin-bottom:15px;
+}
+
+pre{
+background:#222;
+color:#90EE90;
+padding:12px;
+border-radius:8px;
+overflow:auto;
+margin-top:12px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th{
+background:#8b5e3c;
+color:white;
+padding:10px;
+}
+
+td{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+.note{
+margin-top:15px;
+padding:12px;
+background:#f5ede6;
+border-left:5px solid #8b5e3c;
+border-radius:8px;
+}
+
+.flow{
+background:#f8f8f8;
+padding:18px;
+border-radius:10px;
+line-height:2;
+font-family:Consolas;
+margin-top:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🐞 Debugging using LLDB</h1>
+
+<nav>
+
+<button onclick="location.href='index.html'">🏠 Home</button>
+
+<button onclick="location.href='index.html'">⬅ Previous</button>
+
+<button>Next ➜</button>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>🐞 What is Debugging?</h2>
+
+<p>
+
+Debugging is the process of finding and fixing errors in a program.
+Instead of guessing, a debugger runs the program step by step and shows the values of variables.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>🔄 Debug Loop</h2>
+
+<div class="flow">
+
+Write Code<br>
+
+⬇<br>
+
+Compile with <b>-g</b><br>
+
+⬇<br>
+
+Start LLDB<br>
+
+⬇<br>
+
+Breakpoint<br>
+
+⬇<br>
+
+Run Program<br>
+
+⬇<br>
+
+Next → Check Variables<br>
+
+⬇<br>
+
+Quit
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>⚙ Compile with Debug Info</h2>
+
+<pre>
+clang -g file.c -o file
+</pre>
+
+<div class="note">
+
+<b>-g</b> adds debugging information so LLDB can map machine code back to C source code.
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🚀 Start LLDB</h2>
+
+<pre>
+lldb ./file
+</pre>
+
+<p>
+
+Loads the executable into the debugger.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>🛑 Common LLDB Commands</h2>
+
+<table>
+
+<tr>
+
+<th>Command</th>
+
+<th>Purpose</th>
+
+</tr>
+
+<tr>
+
+<td>b main</td>
+
+<td>Breakpoint at main()</td>
+
+</tr>
+
+<tr>
+
+<td>run</td>
+
+<td>Start Program</td>
+
+</tr>
+
+<tr>
+
+<td>next</td>
+
+<td>Execute Next Line</td>
+
+</tr>
+
+<tr>
+
+<td>frame variable</td>
+
+<td>Show Variables</td>
+
+</tr>
+
+<tr>
+
+<td>print total</td>
+
+<td>Print One Variable</td>
+
+</tr>
+
+<tr>
+
+<td>continue</td>
+
+<td>Run Until Next Stop</td>
+
+</tr>
+
+<tr>
+
+<td>quit</td>
+
+<td>Exit LLDB</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>💻 Simple Debug Example</h2>
+
+<pre>
+clang -g main.c -o main
+
+lldb ./main
+
+b main
+
+run
+
+next
+
+frame variable
+
+continue
+
+quit
+</pre>
+
+<p>
+
+Watch the program line by line and observe variable values.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>📘 One-Page Command Reference</h2>
+
+<table>
+
+<tr>
+<th>Goal</th>
+<th>Command</th>
+</tr>
+
+<tr>
+<td>Compile with Debug Info</td>
+<td>clang -g file.c -o file</td>
+</tr>
+
+<tr>
+<td>Start Debugger</td>
+<td>lldb ./file</td>
+</tr>
+
+<tr>
+<td>Breakpoint</td>
+<td>b main</td>
+</tr>
+
+<tr>
+<td>Run</td>
+<td>run</td>
+</tr>
+
+<tr>
+<td>Next Line</td>
+<td>next</td>
+</tr>
+
+<tr>
+<td>Variables</td>
+<td>frame variable</td>
+</tr>
+
+<tr>
+<td>Print Variable</td>
+<td>print total</td>
+</tr>
+
+<tr>
+<td>Continue</td>
+<td>continue</td>
+</tr>
+
+<tr>
+<td>Quit</td>
+<td>quit</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- Continue with Part 2 --><footer style="
+text-align:center;
+padding:30px;
+font-size:16px;
+font-weight:600;
+color:#6b4226;
+">
+
+Debugging using LLDB Presentation
+
+</footer>
+
+<script>
+
+// Fade Animation
+
+const cards=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{
+threshold:0.2
+});
+
+cards.forEach(card=>observer.observe(card));
+
+
+// Hover Animation
+
+cards.forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.transform="translateY(-8px) scale(1.02)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+if(card.classList.contains("show")){
+
+card.style.transform="translateY(0) scale(1)";
+
+}
+
+});
+
+});
+
+
+// Page Load Animation
+
+window.onload=()=>{
+
+document.body.style.opacity="1";
+
+};
+
+
+// Next Button
+
+document.querySelectorAll("nav button")[2].onclick=()=>{
+
+location.href="linux-commands.html";
+
+};
+
+</script>
+
+</body>
+</html>

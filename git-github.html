@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git & GitHub</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+body{
+background:#faf8f5;
+color:#222;
+line-height:1.6;
+}
+
+header{
+text-align:center;
+padding:50px 20px;
+background:#8b5e3c;
+color:white;
+}
+
+header h1{
+font-size:42px;
+}
+
+header p{
+margin-top:10px;
+font-size:18px;
+}
+
+.container{
+max-width:1100px;
+margin:40px auto;
+padding:20px;
+}
+
+.card{
+
+background:white;
+margin-bottom:30px;
+padding:30px;
+border-radius:18px;
+border-left:6px solid #8b5e3c;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0);
+}
+
+h2{
+color:#6b4226;
+margin-bottom:15px;
+}
+
+pre{
+
+background:#222;
+color:#7CFC98;
+
+padding:15px;
+
+border-radius:10px;
+
+overflow:auto;
+
+margin:15px 0;
+
+}
+
+.note{
+
+background:#f5ede6;
+
+padding:12px;
+
+border-left:4px solid #8b5e3c;
+
+border-radius:8px;
+
+}
+
+.buttons{
+
+display:flex;
+justify-content:space-between;
+margin:50px 0;
+
+}
+
+button{
+
+padding:14px 28px;
+
+border:none;
+
+background:#8b5e3c;
+
+color:white;
+
+font-size:16px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+background:#6b4226;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Git & GitHub</h1>
+
+<p>Local Git Commands & SSH Key Generation</p>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>What is Local Git?</h2>
+
+<p>Git tracks changes in your project on your local machine before sending them to GitHub.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Initialize a Repository</h2>
+
+<pre>git init</pre>
+
+<p>Creates a new local Git repository.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Common Git Commands</h2>
+
+<pre>
+git status
+git add .
+git commit -m "message"
+git log
+git diff
+</pre>
+
+</div>
+
+<div class="card">
+
+<h2>Configure Your Identity</h2>
+
+<pre>
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+</pre>
+
+<p>Run only once on your machine.</p>
+
+<h3>Verify</h3>
+
+<pre>git config --global --list</pre>
+
+</div>
+
+<div class="card">
+
+<h2>Generate SSH Key</h2>
+
+<pre>
+ssh-keygen -t ed25519 -C "your-email@example.com"
+</pre>
+
+<div class="note">
+Press <b>Enter</b> three times to accept the default settings.
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Start SSH Agent</h2>
+
+<pre>
+eval "$(ssh-agent -s)"
+</pre>
+
+<p>Starts the SSH agent.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Add Your Key</h2>
+
+<pre>
+ssh-add ~/.ssh/id_ed25519
+</pre>
+
+<p>Adds your private key to the SSH agent.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Copy Public Key</h2>
+
+<pre>
+cat ~/.ssh/id_ed25519.pub
+</pre>
+
+<p>Copy the displayed key.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Add Key to GitHub</h2>
+
+<p>
+
+GitHub → Profile → Settings → SSH and GPG Keys → New SSH Key
+
+</p>
+
+<p>Paste the copied public key and save.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Trust GitHub</h2>
+
+<pre>
+ssh -T git@github.com
+</pre>
+
+<div class="note">
+
+When prompted, type:
+
+<b>yes</b>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Test SSH Connection</h2>
+
+<pre>
+ssh -T git@github.com
+</pre>
+
+<p>
+
+Expected:
+
+</p>
+
+<pre>
+Hi username!
+You've successfully authenticated.
+</pre>
+
+</div>
+
+<div class="card">
+
+<h2>Clone Repository</h2>
+
+<pre>
+git clone git@github.com:username/repository.git
+</pre>
+
+<p>Downloads the repository using SSH.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Verify Remote</h2>
+
+<pre>
+git remote -v
+</pre>
+
+<p>Ensure the remote URL starts with <b>git@github.com</b>.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Debug SSH</h2>
+
+<pre>
+ssh -vT git@github.com
+</pre>
+
+<p>Shows detailed SSH connection information.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Complete Git Workflow</h2>
+
+<pre>
+git status
+git add .
+git commit -m "Describe your change"
+git push origin main
+</pre>
+
+<div class="note">
+
+Run these commands every time after making changes.
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button onclick="location.href='index.html'">
+
+🏠 Home
+
+</button>
+
+<button onclick="location.href='system-internals.html'">
+
+Next Chapter →
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const cards=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{threshold:0.2});
+
+cards.forEach(card=>observer.observe(card));
+
+</script>
+
+</body>
+</html>

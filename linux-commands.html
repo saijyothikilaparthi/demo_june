@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux Commands</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+body{
+background:#faf8f5;
+color:#222;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#d9b38230,transparent 35%),
+radial-gradient(circle at bottom right,#8b5e3c18,transparent 40%);
+z-index:-1;
+}
+
+header{
+
+background:white;
+padding:25px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:4px solid #8b5e3c;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+header h1{
+
+color:#6b4226;
+font-size:34px;
+
+}
+
+nav button{
+
+padding:10px 20px;
+margin-left:10px;
+border:none;
+border-radius:8px;
+background:#8b5e3c;
+color:white;
+cursor:pointer;
+transition:.3s;
+
+}
+
+nav button:hover{
+
+background:#6b4226;
+transform:translateY(-3px);
+
+}
+
+.container{
+
+max-width:1200px;
+margin:40px auto;
+padding:20px;
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+padding:25px;
+border-radius:18px;
+border-left:6px solid #8b5e3c;
+box-shadow:0 12px 25px rgba(0,0,0,.08);
+
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+
+}
+
+.card.show{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+.card h2{
+
+color:#6b4226;
+margin-bottom:15px;
+
+}
+
+pre{
+
+background:#222;
+color:#90EE90;
+padding:12px;
+border-radius:8px;
+overflow:auto;
+margin-top:12px;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+
+}
+
+th{
+
+background:#8b5e3c;
+color:white;
+padding:10px;
+
+}
+
+td{
+
+padding:10px;
+border-bottom:1px solid #ddd;
+
+}
+
+.note{
+
+margin-top:15px;
+padding:12px;
+background:#f5ede6;
+border-left:5px solid #8b5e3c;
+border-radius:8px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🐧 Linux Commands</h1>
+
+<nav>
+
+<button onclick="location.href='index.html'">🏠 Home</button>
+
+<button onclick="location.href='debugging.html'">⬅ Previous</button>
+
+<button>Next ➜</button>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>📖 Manual</h2>
+
+<pre>man &lt;command&gt;</pre>
+
+<p>Opens the manual page of a command.</p>
+
+</div>
+
+<div class="card">
+
+<h2>🧹 Clear Screen</h2>
+
+<pre>clear</pre>
+
+<p>Clears the terminal screen.</p>
+
+</div>
+
+<div class="card">
+
+<h2>👤 User & System</h2>
+
+<table>
+
+<tr><th>Command</th><th>Purpose</th></tr>
+
+<tr><td>whoami</td><td>Current User</td></tr>
+
+<tr><td>who</td><td>Logged-in Users</td></tr>
+
+<tr><td>uname -a</td><td>System Information</td></tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>📂 Command Location</h2>
+
+<table>
+
+<tr><th>Command</th><th>Purpose</th></tr>
+
+<tr><td>which ls</td><td>Executable Location</td></tr>
+
+<tr><td>whereis ls</td><td>Executable + Manual</td></tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>🖨 Printing & Time</h2>
+
+<pre>
+echo "Hello"
+
+echo -e "A\nB"
+
+date
+
+time ls
+</pre>
+
+</div>
+
+<div class="card">
+
+<h2>📁 Files & Folders</h2>
+
+<pre>
+touch file.txt
+
+ls -a
+
+du -sh folder
+
+rmdir folder
+</pre>
+
+</div>
+
+<div class="card">
+
+<h2>🔐 Permissions</h2>
+
+<pre>
+chmod +x script.sh
+
+chmod -x script.sh
+</pre>
+
+<p>Give or remove execute permission.</p>
+
+</div>
+
+<div class="card">
+
+<h2>▶ Run Script</h2>
+
+<pre>
+bash script.sh
+
+./script.sh
+</pre>
+
+</div>
+
+<div class="card">
+
+<h2>🌐 Internet</h2>
+
+<pre>
+curl https://example.com
+
+curl -o page.html https://example.com
+</pre>
+
+</div>
+
+<div class="card">
+
+<h2>⚙ Process & PATH</h2>
+
+<pre>
+kill &lt;PID&gt;
+
+timedatectl
+
+echo $PATH
+</pre>
+
+<div class="note">
+
+<b>Remember</b><br><br>
+
+Read Manual → Run Command → Try Options → Observe Output
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Continue with Part 2 --><footer style="
+text-align:center;
+padding:30px;
+font-size:16px;
+color:#6b4226;
+font-weight:600;
+">
+
+Linux Commands Presentation
+
+</footer>
+
+<script>
+
+// Card Animation
+
+const cards=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{
+threshold:0.2
+});
+
+cards.forEach(card=>observer.observe(card));
+
+
+// Next Button
+
+document.querySelectorAll("nav button")[2].onclick=()=>{
+
+location.href="number-system.html";
+
+};
+
+
+// Small Hover Effect
+
+cards.forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.transform="translateY(-8px) scale(1.02)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+if(card.classList.contains("show")){
+
+card.style.transform="translateY(0) scale(1)";
+
+}
+
+});
+
+});
+
+
+// Smooth Page Load
+
+window.onload=()=>{
+
+document.body.style.opacity="1";
+
+};
+
+</script>
+
+</body>
+</html>

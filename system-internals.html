@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Internals</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+
+    background:#faf8f5;
+    color:#222;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+
+}
+
+body::before{
+
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at top left,#d9b38240,transparent 35%),
+    radial-gradient(circle at bottom right,#8b5e3c25,transparent 40%);
+
+    z-index:-1;
+
+}
+
+.card{
+
+    width:700px;
+    background:white;
+
+    padding:50px;
+
+    border-radius:20px;
+
+    border-left:7px solid #8b5e3c;
+
+    text-align:center;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.08);
+
+    animation:fadeUp .8s ease;
+
+}
+
+.icon{
+
+    font-size:80px;
+
+    margin-bottom:20px;
+
+    animation:float 3s ease-in-out infinite;
+
+}
+
+h1{
+
+    color:#6b4226;
+
+    margin-bottom:20px;
+
+    font-size:42px;
+
+}
+
+p{
+
+    font-size:20px;
+
+    color:#555;
+
+    margin-bottom:35px;
+
+    line-height:1.8;
+
+}
+
+.btn-group{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+button{
+
+    background:#8b5e3c;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 28px;
+
+    font-size:16px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#6b4226;
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 20px rgba(0,0,0,.18);
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+transform:translateY(50px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes float{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="icon">🖥️</div>
+
+<h1>System Internals</h1>
+
+<p>
+
+Click below to open the interactive presentation.
+
+</p>
+
+<div class="btn-group">
+
+<button onclick="location.href='index.html'">
+🏠 Home
+</button>
+
+<button onclick="location.href='git-github.html'">
+⬅ Previous
+</button>
+
+<button onclick="window.open('https://www.figma.com/proto/VRgWntdUUcOCMnhnjuYXlG/Fundamentals-of-Computing?node-id=108-81&scaling=scale-down-width&hide-ui=1','_blank')">
+🖥️ Open Presentation
+</button>
+
+<button onclick="location.href='c-compilation.html'">
+Next ➜
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+// Small entrance animation
+window.onload=()=>{
+
+document.querySelector(".card").style.transform="scale(1)";
+document.querySelector(".card").style.opacity="1";
+
+}
+
+</script>
+
+</body>
+</html>

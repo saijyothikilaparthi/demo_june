@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relative & Absolute Paths</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+body{
+background:#faf8f5;
+color:#222;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#d9b38235,transparent 35%),
+radial-gradient(circle at bottom right,#8b5e3c20,transparent 40%);
+z-index:-1;
+}
+
+header{
+padding:25px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+border-bottom:4px solid #8b5e3c;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+h1{
+color:#6b4226;
+}
+
+nav button{
+
+padding:10px 20px;
+margin-left:10px;
+border:none;
+border-radius:8px;
+background:#8b5e3c;
+color:white;
+cursor:pointer;
+transition:.3s;
+
+}
+
+nav button:hover{
+background:#6b4226;
+transform:translateY(-3px);
+}
+
+.container{
+max-width:1200px;
+margin:40px auto;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:25px;
+}
+
+.card{
+
+background:white;
+padding:25px;
+border-radius:18px;
+border-left:6px solid #8b5e3c;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0);
+}
+
+h2{
+color:#6b4226;
+margin-bottom:15px;
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+th{
+
+background:#8b5e3c;
+color:white;
+padding:10px;
+
+}
+
+td{
+
+padding:10px;
+border-bottom:1px solid #ddd;
+
+}
+
+pre{
+
+background:#222;
+color:#90EE90;
+padding:12px;
+border-radius:8px;
+overflow:auto;
+margin-top:12px;
+
+}
+
+.tree{
+
+font-family:Consolas;
+background:#f7f7f7;
+padding:18px;
+border-radius:10px;
+margin-top:15px;
+line-height:1.8;
+
+}
+
+.note{
+
+margin-top:15px;
+background:#f5ede6;
+padding:12px;
+border-left:5px solid #8b5e3c;
+border-radius:8px;
+
+}
+
+footer{
+
+text-align:center;
+padding:40px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>📂 Relative & Absolute Paths</h1>
+
+<nav>
+
+<button onclick="location.href='index.html'">🏠 Home</button>
+
+<button onclick="location.href='c-compilation.html'">⬅ Previous</button>
+
+<button onclick="location.href='debugging.html'">Next ➜</button>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>What is a Path?</h2>
+
+<p>A <b>Path</b> is the location of a file or folder.</p>
+
+<table>
+
+<tr><th>Symbol</th><th>Meaning</th></tr>
+
+<tr><td>/</td><td>Root Folder</td></tr>
+
+<tr><td>~</td><td>Home Folder</td></tr>
+
+<tr><td>.</td><td>Current Folder</td></tr>
+
+<tr><td>..</td><td>Parent Folder</td></tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Absolute vs Relative Path</h2>
+
+<table>
+
+<tr>
+
+<th>Absolute</th>
+
+<th>Relative</th>
+
+</tr>
+
+<tr>
+
+<td>Starts with /</td>
+
+<td>Starts from Current Folder</td>
+
+</tr>
+
+<tr>
+
+<td>Same everywhere</td>
+
+<td>Depends on current location</td>
+
+</tr>
+
+<tr>
+
+<td>Full Address</td>
+
+<td>Short Address</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Example Folder Structure</h2>
+
+<div class="tree">
+
+Desktop<br>
+
+└── Kutumbam<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;├── Peddamma<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── Ravi<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── Sita<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;└── Pinni<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── Kiran<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Geetha
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Example</h2>
+
+<p><b>Current Folder:</b> Ravi</p>
+
+<p><b>Go To:</b> Kiran</p>
+
+<b>Relative Path</b>
+
+<pre>cd ../../Pinni/Kiran</pre>
+
+<b>Absolute Path</b>
+
+<pre>cd /c/Users/username/Desktop/Kutumbam/Pinni/Kiran</pre>
+
+</div>
+
+<div class="card">
+
+<h2>Useful Commands</h2>
+
+<pre>
+pwd      → Print Current Directory
+
+cd ~     → Home Directory
+
+cd ..    → Parent Directory
+
+cd -     → Previous Directory
+
+cd       → Home Directory
+
+ls       → List Files & Folders
+</pre>
+
+<div class="note">
+
+<b>Remember</b><br><br>
+
+✔ Starts with <b>/</b> → Absolute Path<br>
+
+✔ Starts with <b>.</b>, <b>..</b> or folder name → Relative Path
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+Relative & Absolute Paths Presentation
+
+</footer>
+
+<script>
+
+const cards=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{threshold:0.2});
+
+cards.forEach(card=>observer.observe(card));
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>C Compilation Pipeline</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+
+background:#faf8f5;
+overflow-x:hidden;
+color:#222;
+
+}
+
+body::before{
+
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#d9b38235,transparent 35%),
+radial-gradient(circle at bottom right,#8b5e3c20,transparent 40%);
+z-index:-1;
+
+}
+
+header{
+
+padding:30px;
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:4px solid #8b5e3c;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+header h1{
+
+color:#6b4226;
+font-size:34px;
+
+}
+
+.nav button{
+
+margin-left:10px;
+padding:12px 22px;
+border:none;
+border-radius:10px;
+background:#8b5e3c;
+color:white;
+cursor:pointer;
+transition:.3s;
+
+}
+
+.nav button:hover{
+
+background:#6b4226;
+transform:translateY(-3px);
+
+}
+
+.title{
+
+text-align:center;
+margin:40px;
+
+}
+
+.title h2{
+
+font-size:40px;
+color:#6b4226;
+
+}
+
+.title p{
+
+margin-top:15px;
+font-size:20px;
+color:#555;
+
+}
+
+.progress{
+
+width:0%;
+height:5px;
+background:#8b5e3c;
+position:fixed;
+top:0;
+left:0;
+z-index:999;
+transition:1s;
+
+}
+
+.pipeline{
+
+    display:flex;
+    align-items:center;
+
+    gap:30px;
+
+    padding:60px 120px;   /* Top/Bottom 60px, Left/Right 120px */
+
+    overflow-x:auto;
+
+    justify-content:flex-start;
+
+    scroll-behavior:smooth;
+
+}
+
+.box{
+
+min-width:190px;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+text-align:center;
+
+border-left:6px solid #8b5e3c;
+
+box-shadow:0 15px 30px rgba(0,0,0,.08);
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:1s;
+
+}
+
+.box.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+.box h3{
+
+color:#6b4226;
+margin-bottom:15px;
+
+}
+
+.box .icon{
+
+font-size:45px;
+
+margin:15px;
+
+animation:float 3s infinite;
+
+}
+
+.command{
+
+margin-top:15px;
+
+background:#222;
+
+color:#90EE90;
+
+padding:12px;
+
+border-radius:8px;
+
+font-family:Consolas;
+
+font-size:14px;
+
+}
+
+.arrow{
+
+font-size:42px;
+
+color:#8b5e3c;
+
+opacity:0;
+
+transition:1s;
+
+}
+
+.arrow.show{
+
+opacity:1;
+
+transform:translateX(10px);
+
+}
+
+.info{
+
+max-width:1200px;
+
+margin:30px auto;
+
+padding:20px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+border-left:5px solid #8b5e3c;
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:1s;
+
+}
+
+.card.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+.card h3{
+
+color:#6b4226;
+
+margin-bottom:15px;
+
+}
+
+.card p{
+
+line-height:1.8;
+
+}
+
+@keyframes float{
+
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+
+}
+.cmd-table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+
+}
+
+.cmd-table th{
+
+background:#8b5e3c;
+color:white;
+padding:14px;
+
+}
+
+.cmd-table td{
+
+padding:14px;
+border-bottom:1px solid #ddd;
+vertical-align:top;
+
+}
+
+.cmd-table tr:nth-child(even){
+
+background:#faf8f5;
+
+}
+
+.cmd-table code{
+
+background:#222;
+color:#90EE90;
+padding:5px 8px;
+border-radius:5px;
+font-family:Consolas;
+
+}
+
+.highlight{
+
+margin-top:25px;
+padding:18px;
+background:#f5ede6;
+border-left:5px solid #8b5e3c;
+border-radius:10px;
+font-size:18px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="progress"></div>
+
+<header>
+
+<h1>C Compilation Process</h1>
+
+<div class="nav">
+
+<button onclick="location.href='index.html'">
+🏠 Home
+</button>
+
+<button onclick="location.href='system-internals.html'">
+⬅ Previous
+</button>
+
+<button>
+Next ➜
+</button>
+
+</div>
+
+</header>
+
+<div class="title">
+
+<h2>Compilation Pipeline</h2>
+
+<p>
+
+From C Source Code to Executable
+
+</p>
+
+</div>
+
+<div class="pipeline">
+
+<div class="box">
+
+<div class="icon">📄</div>
+
+<h3>.c</h3>
+
+<p>C Source File</p>
+
+<div class="command">
+
+clang file.c
+
+</div>
+
+</div>
+
+<div class="arrow">➜</div>
+
+<div class="box">
+
+<div class="icon">📝</div>
+
+<h3>.i</h3>
+
+<p>Preprocessed Code</p>
+
+<div class="command">
+
+clang -E file.c
+
+</div>
+
+</div>
+
+<div class="arrow">➜</div>
+
+<div class="box">
+
+<div class="icon">⚙️</div>
+
+<h3>.ll / .bc</h3>
+
+<p>LLVM IR</p>
+
+<div class="command">
+
+clang -emit-llvm
+
+</div>
+
+</div>
+
+<div class="arrow">➜</div>
+
+<div class="box">
+
+<div class="icon">💻</div>
+
+<h3>.s</h3>
+
+<p>Assembly Code</p>
+
+<div class="command">
+
+clang -S file.c
+
+</div>
+
+</div>
+
+<div class="arrow">➜</div>
+
+<div class="box">
+
+<div class="icon">📦</div>
+
+<h3>.o</h3>
+
+<p>Object File</p>
+
+<div class="command">
+
+clang -c file.c
+
+</div>
+
+</div>
+
+<div class="arrow">➜</div>
+
+<div class="box">
+
+<div class="icon">🚀</div>
+
+<h3>Executable</h3>
+
+<p>a.out / exe</p>
+
+<div class="command">
+
+clang file.c
+
+</div>
+
+</div>
+
+</div>
+
+<div class="info">
+
+<div class="card">
+
+<h3>Pipeline Order</h3>
+
+<p>
+
+.c → .i → .ll/.bc → .s → .o → Executable
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Compiler Stages</h3>
+
+<p>
+
+Preprocessor → Clang Front-End → LLVM Back-End → Assembler → Linker
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Generate All Files</h3>
+
+<div class="command">
+
+clang --save-temps -c file.c
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Main Idea</h3>
+
+<p>
+
+Clang always passes through LLVM IR before generating Assembly Code.
+
+</p>
+
+</div>
+
+</div>
+
+<section class="info">
+
+<div class="card" style="grid-column:1/-1">
+
+<h3>📘 One-Page Command Reference</h3>
+
+<table class="cmd-table">
+
+<tr>
+<th>Goal</th>
+<th>Command</th>
+</tr>
+
+<tr>
+<td>Preprocessed Source (.i)</td>
+<td><code>clang -E file.c -o file.i</code></td>
+</tr>
+
+<tr>
+<td>Without Line Markers</td>
+<td><code>clang -E -P file.c</code></td>
+</tr>
+
+<tr>
+<td>All Intermediate Files</td>
+<td><code>clang --save-temps -c file.c</code></td>
+</tr>
+
+<tr>
+<td>Generate Text IR (.ll)</td>
+<td><code>clang -emit-llvm -S file.c -o file.ll</code></td>
+</tr>
+
+<tr>
+<td>Generate Binary IR (.bc)</td>
+<td><code>clang -emit-llvm -c file.c -o file.bc</code></td>
+</tr>
+
+<tr>
+<td>Bitcode → Text IR</td>
+<td><code>llvm-dis file.bc -o file.ll</code></td>
+</tr>
+
+<tr>
+<td>Native Assembly (.s)</td>
+<td><code>clang -S file.c</code></td>
+</tr>
+
+<tr>
+<td>Compare Optimizer</td>
+<td><code>clang -O0/-O2 -emit-llvm -S file.c</code></td>
+</tr>
+
+</table>
+
+<div class="highlight">
+
+<b>Remember the Order</b>
+
+<br><br>
+
+.c → .i → IR (.ll/.bc) → .s → .o → Executable
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Continue in Response 2 -->
+ <script>
+
+const boxes=document.querySelectorAll(".box");
+const arrows=document.querySelectorAll(".arrow");
+const cards=document.querySelectorAll(".card");
+const progress=document.querySelector(".progress");
+
+// Animate pipeline boxes one by one
+boxes.forEach((box,index)=>{
+
+setTimeout(()=>{
+
+box.classList.add("show");
+
+if(arrows[index]){
+
+setTimeout(()=>{
+
+arrows[index].classList.add("show");
+
+},300);
+
+}
+
+},index*700);
+
+});
+
+// Animate information cards
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{threshold:.25});
+
+cards.forEach(card=>observer.observe(card));
+
+// Progress Bar
+
+window.onload=()=>{
+
+progress.style.width="100%";
+
+};
+
+// Next Button
+
+document.querySelectorAll(".nav button")[2].onclick=()=>{
+
+location.href="relative-absolute-paths.html";
+
+};
+
+</script>
+
+</body>
+</html>

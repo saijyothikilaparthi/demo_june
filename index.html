@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programming Fundamentals Presentation</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+
+    background:#faf8f5;
+    color:#222;
+    min-height:100vh;
+    overflow-x:hidden;
+
+}
+
+body::before{
+
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+
+radial-gradient(circle at top left,#d9b38233,transparent 40%),
+radial-gradient(circle at bottom right,#8b5e3c22,transparent 35%);
+
+z-index:-1;
+
+}
+
+header{
+
+padding:60px 20px 40px;
+text-align:center;
+animation:fadeDown 1s ease;
+
+}
+
+header h1{
+
+font-size:50px;
+letter-spacing:2px;
+color:#6b4226;
+margin-bottom:15px;
+
+}
+
+header p{
+
+font-size:18px;
+max-width:700px;
+margin:auto;
+line-height:1.8;
+
+}
+
+.container{
+
+max-width:1200px;
+margin:auto;
+padding:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+border-left:6px solid #8b5e3c;
+padding:28px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+transition:.4s;
+cursor:pointer;
+text-decoration:none;
+color:black;
+animation:fadeUp .8s ease forwards;
+opacity:0;
+
+}
+
+.card:hover{
+
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.card h2{
+
+font-size:24px;
+margin-bottom:15px;
+color:#6b4226;
+
+}
+
+.card p{
+
+line-height:1.7;
+font-size:15px;
+
+}
+
+footer{
+
+padding:40px;
+text-align:center;
+font-size:15px;
+color:#555;
+
+}
+
+@keyframes fadeDown{
+
+from{
+opacity:0;
+transform:translateY(-40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Programming Fundamentals</h1>
+
+</header>
+
+<div class="container">
+<a href="algorithmic-principles.html" class="card">
+<h2>01</h2>
+<h2>Algorithmic Principles</h2>
+<p>Learn the fundamentals of algorithms and problem-solving techniques.</p>
+</a>
+
+<a href="git-github.html" class="card">
+<h2>02</h2>
+<h2>Git & GitHub</h2>
+<p>Local Git commands and SSH key generation.</p>
+</a>
+
+<a href="system-internals.html" class="card">
+<h2>03</h2>
+<h2>System Internals</h2>
+<p>Understand how a computer executes programs internally.</p>
+</a>
+
+<a href="c-compilation.html" class="card">
+<h2>04</h2>
+<h2>C Compilation</h2>
+<p>Compilation process.</p>
+</a>
+
+<a href="relative-absolute-paths.html" class="card">
+<h2>05</h2>
+<h2>Relative & Absolute Paths</h2>
+<p>Understand path navigation and file locations in operating systems.</p>
+</a>
+<a href="linux-commands.html" class="card">
+<h2>06</h2>
+<h2>Linux Commands</h2>
+<p>Common Linux commands used in development.</p>
+</a>
+
+<a href="number-system.html" class="card">
+<h2>07</h2>
+<h2>Number System</h2>
+<p>Binary, Decimal, Octal and Hexadecimal concepts.</p>
+</a>
+<a href="debugging.html" class="card">
+<h2>08</h2>
+<h2>Debugging</h2>
+<p>Finding and fixing errors using debugging techniques.</p>
+</a>
+
+
+
+
+
+
+
+</div>
+
+<footer>
+
+Programming Fundamentals Presentation
+
+</footer>
+
+<script>
+
+const cards=document.querySelectorAll(".card");
+
+cards.forEach((card,index)=>{
+
+card.style.animationDelay=`${index*0.12}s`;
+
+});
+
+</script>
+
+</body>
+</html>
