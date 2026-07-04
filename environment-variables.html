@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Environment Variables</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#faf8f5;
+color:#222;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#d9b38235,transparent 35%),
+radial-gradient(circle at bottom right,#8b5e3c20,transparent 40%);
+z-index:-1;
+}
+
+header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 40px;
+background:#fff;
+border-bottom:4px solid #8b5e3c;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+header h1{
+
+color:#6b4226;
+
+}
+
+nav button{
+
+padding:10px 20px;
+margin-left:10px;
+border:none;
+border-radius:8px;
+background:#8b5e3c;
+color:#fff;
+cursor:pointer;
+transition:.3s;
+
+}
+
+nav button:hover{
+
+background:#6b4226;
+transform:translateY(-3px);
+
+}
+
+.container{
+
+max-width:1200px;
+margin:40px auto;
+padding:20px;
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+
+}
+
+.card{
+
+background:#fff;
+padding:25px;
+border-radius:18px;
+border-left:6px solid #8b5e3c;
+box-shadow:0 12px 25px rgba(0,0,0,.08);
+
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+
+}
+
+.card.show{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+.card h2{
+
+color:#6b4226;
+margin-bottom:15px;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+
+}
+
+th{
+
+background:#8b5e3c;
+color:white;
+padding:10px;
+
+}
+
+td{
+
+padding:10px;
+border-bottom:1px solid #ddd;
+
+}
+
+pre{
+
+background:#222;
+color:#90EE90;
+padding:12px;
+border-radius:8px;
+margin-top:12px;
+overflow:auto;
+
+}
+
+.note{
+
+margin-top:15px;
+background:#f5ede6;
+padding:12px;
+border-left:5px solid #8b5e3c;
+border-radius:8px;
+
+}
+
+footer{
+
+text-align:center;
+padding:35px;
+color:#6b4226;
+font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🌍 Environment Variables</h1>
+
+<nav>
+
+<button onclick="location.href='index.html'">🏠 Home</button>
+
+<button onclick="location.href='debugging.html'">⬅ Previous</button>
+
+<button onclick="alert('Presentation Completed 🎉')">Finish ✓</button>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>What are Environment Variables?</h2>
+
+<p>
+
+Environment Variables are <b>name-value pairs</b> used by the Operating System and applications to store configuration information.
+
+</p>
+
+<div class="note">
+
+Example:<br>
+
+USERNAME = jyothi<br>
+
+HOME = /home/user
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Why are they used?</h2>
+
+<ul style="padding-left:20px;line-height:2;">
+
+<li>Store system settings</li>
+
+<li>Store user information</li>
+
+<li>Locate software</li>
+
+<li>Share configuration between programs</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Common Variables</h2>
+
+<table>
+
+<tr><th>Variable</th><th>Purpose</th></tr>
+
+<tr><td>HOME</td><td>User Home Folder</td></tr>
+
+<tr><td>PATH</td><td>Command Search Path</td></tr>
+
+<tr><td>USER</td><td>Current User</td></tr>
+
+<tr><td>PWD</td><td>Current Directory</td></tr>
+
+<tr><td>SHELL</td><td>Current Shell</td></tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>View Variables</h2>
+
+<pre>
+
+printenv
+
+env
+
+echo $HOME
+
+echo $PATH
+
+</pre>
+
+</div>
+
+<div class="card">
+
+<h2>Create Variable</h2>
+
+<pre>
+
+name="OpenAI"
+
+echo $name
+
+export name
+
+</pre>
+
+<p>
+
+Use <b>export</b> to make the variable available to child processes.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>PATH Variable</h2>
+
+<p>
+
+<b>PATH</b> tells Linux where to search for executable programs.
+
+</p>
+
+<pre>
+
+echo $PATH
+
+</pre>
+
+<div class="note">
+
+Directories are separated using <b>:</b>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Remember</h2>
+
+<table>
+
+<tr><th>Command</th><th>Purpose</th></tr>
+
+<tr><td>printenv</td><td>Display Variables</td></tr>
+
+<tr><td>env</td><td>List Variables</td></tr>
+
+<tr><td>echo $HOME</td><td>Show Home Folder</td></tr>
+
+<tr><td>echo $PATH</td><td>Show PATH</td></tr>
+
+<tr><td>export</td><td>Create/Export Variable</td></tr>
+
+</table>
+
+</div>
+
+</div>
+
+<footer>
+
+Environment Variables Presentation
+
+</footer>
+
+<script>
+
+const cards=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{threshold:.2});
+
+cards.forEach(card=>observer.observe(card));
+
+cards.forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.transform="translateY(-8px) scale(1.02)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+if(card.classList.contains("show"))
+
+card.style.transform="translateY(0) scale(1)";
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
