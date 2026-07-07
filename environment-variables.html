@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>Environment Variables</title>
 
 <style>
@@ -14,31 +16,50 @@ box-sizing:border-box;
 font-family:Segoe UI,sans-serif;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
+
 background:#faf8f5;
-color:#222;
 overflow-x:hidden;
+color:#222;
+
 }
 
 body::before{
+
 content:"";
 position:fixed;
 inset:0;
+
 background:
-radial-gradient(circle at top left,#d9b38235,transparent 35%),
-radial-gradient(circle at bottom right,#8b5e3c20,transparent 40%);
+radial-gradient(circle at top left,#d9b38240,transparent 35%),
+radial-gradient(circle at bottom right,#8b5e3c25,transparent 40%);
+
 z-index:-1;
+
 }
 
 header{
 
+position:sticky;
+top:0;
+
+background:white;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 40px;
-background:#fff;
+
+padding:20px 40px;
+
 border-bottom:4px solid #8b5e3c;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+z-index:999;
 
 }
 
@@ -46,17 +67,26 @@ header h1{
 
 color:#6b4226;
 
+font-size:32px;
+
 }
 
 nav button{
 
-padding:10px 20px;
+padding:10px 22px;
+
 margin-left:10px;
-border:none;
-border-radius:8px;
+
 background:#8b5e3c;
-color:#fff;
+
+border:none;
+
+color:white;
+
+border-radius:8px;
+
 cursor:pointer;
+
 transition:.3s;
 
 }
@@ -64,32 +94,167 @@ transition:.3s;
 nav button:hover{
 
 background:#6b4226;
+
 transform:translateY(-3px);
 
 }
 
-.container{
+.hero{
+
+height:90vh;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+flex-direction:column;
+
+text-align:center;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.hero h2{
+
+font-size:58px;
+
+color:#6b4226;
+
+margin-bottom:20px;
+
+opacity:0;
+
+transform:translateY(50px);
+
+animation:fadeUp 1s forwards;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+width:70%;
+
+line-height:1.7;
+
+opacity:0;
+
+animation:fadeUp 1s .5s forwards;
+
+}
+
+.floatBox{
+
+position:absolute;
+
+padding:18px 28px;
+
+background:white;
+
+border-radius:16px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+border-left:6px solid #8b5e3c;
+
+font-weight:bold;
+
+animation:float 4s ease-in-out infinite;
+
+}
+
+.box1{
+
+top:18%;
+left:12%;
+
+}
+
+.box2{
+
+right:10%;
+top:25%;
+
+animation-delay:1s;
+
+}
+
+.box3{
+
+bottom:18%;
+left:18%;
+
+animation-delay:2s;
+
+}
+
+.box4{
+
+right:18%;
+bottom:18%;
+
+animation-delay:3s;
+
+}
+
+.section{
 
 max-width:1200px;
-margin:40px auto;
+
+margin:80px auto;
+
 padding:20px;
 
+}
+
+.title{
+
+text-align:center;
+
+margin-bottom:50px;
+
+}
+
+.title h2{
+
+font-size:42px;
+
+color:#6b4226;
+
+margin-bottom:10px;
+
+}
+
+.grid{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
+
+grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+gap:30px;
 
 }
 
 .card{
 
-background:#fff;
-padding:25px;
-border-radius:18px;
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+
 border-left:6px solid #8b5e3c;
-box-shadow:0 12px 25px rgba(0,0,0,.08);
 
 opacity:0;
+
 transform:translateY(40px);
+
 transition:1s;
 
 }
@@ -97,67 +262,193 @@ transition:1s;
 .card.show{
 
 opacity:1;
+
 transform:translateY(0);
 
 }
 
-.card h2{
+.card h3{
 
 color:#6b4226;
-margin-bottom:15px;
+
+margin-bottom:20px;
+
+font-size:28px;
 
 }
 
-table{
+.card p{
 
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
+line-height:1.8;
+
+font-size:18px;
 
 }
 
-th{
+.keyValue{
+
+margin-top:25px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:20px;
+
+}
+
+.key{
 
 background:#8b5e3c;
+
 color:white;
-padding:10px;
 
-}
+padding:20px 35px;
 
-td{
+border-radius:12px;
 
-padding:10px;
-border-bottom:1px solid #ddd;
+font-size:24px;
 
-}
-
-pre{
-
-background:#222;
-color:#90EE90;
-padding:12px;
-border-radius:8px;
-margin-top:12px;
-overflow:auto;
-
-}
-
-.note{
-
-margin-top:15px;
-background:#f5ede6;
-padding:12px;
-border-left:5px solid #8b5e3c;
-border-radius:8px;
-
-}
-
-footer{
-
-text-align:center;
-padding:35px;
-color:#6b4226;
 font-weight:bold;
+
+animation:pulse 2s infinite;
+
+}
+
+.equal{
+
+font-size:35px;
+
+font-weight:bold;
+
+}
+
+.value{
+
+background:#fff6ef;
+
+padding:20px 35px;
+
+border-radius:12px;
+
+border:3px dashed #8b5e3c;
+
+font-size:24px;
+
+font-weight:bold;
+
+}
+
+.illustration{
+
+margin-top:30px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:30px;
+
+flex-wrap:wrap;
+
+}
+
+.envBox{
+
+width:180px;
+
+height:150px;
+
+background:#fff;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+border-top:8px solid #8b5e3c;
+
+transition:.4s;
+
+}
+
+.envBox:hover{
+
+transform:translateY(-8px);
+
+}
+
+.envBox h4{
+
+color:#6b4226;
+
+margin-bottom:12px;
+
+font-size:24px;
+
+}
+
+.envBox span{
+
+font-size:18px;
+
+color:#444;
+
+}
+
+.arrow{
+
+font-size:60px;
+
+color:#8b5e3c;
+
+}
+
+@keyframes fadeUp{
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes float{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-18px);
+
+}
+
+}
+
+@keyframes pulse{
+
+50%{
+
+transform:scale(1.05);
+
+}
 
 }
 
@@ -173,33 +464,118 @@ font-weight:bold;
 
 <nav>
 
-<button onclick="location.href='index.html'">🏠 Home</button>
+<button onclick="location.href='index.html'">
+🏠 Home
+</button>
 
+<button onclick="location.href='number-system.html'">
+⬅ Previous
+</button>
 
+<button id="nextBtn">
+Next ➜
+</button>
 
 </nav>
 
 </header>
 
-<div class="container">
+<section class="hero">
 
-<div class="card">
+<div class="floatBox box1">
 
-<h2>What are Environment Variables?</h2>
+📦 PATH
+
+</div>
+
+<div class="floatBox box2">
+
+☕ JAVA_HOME
+
+</div>
+
+<div class="floatBox box3">
+
+👤 USER
+
+</div>
+
+<div class="floatBox box4">
+
+🏠 HOME
+
+</div>
+
+<h2>
+
+Environment Variables
+
+</h2>
 
 <p>
 
-Environment Variables are <b>name-value pairs</b> used by the Operating System and applications to store configuration information.
+A simple way for the Operating System to store important information
+that programs can read and use while running.
 
 </p>
 
-<div class="note">
+</section>
 
-Example:<br>
+<section class="section">
 
-USERNAME = jyothi<br>
+<div class="title">
 
-HOME = /home/user
+<h2>
+
+What are Environment Variables?
+
+</h2>
+
+<p>
+
+Environment Variables are <b>Name = Value</b> pairs.
+
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>
+
+📦 Name = Value
+
+</h3>
+
+<p>
+
+Every Environment Variable has a unique name (Key) and stores a value.
+
+Programs access these values whenever they need information.
+
+</p>
+
+<div class="keyValue">
+
+<div class="key">
+
+JAVA_HOME
+
+</div>
+
+<div class="equal">
+
+=
+
+</div>
+
+<div class="value">
+
+C:\Java\JDK21
+
+</div>
 
 </div>
 
@@ -207,103 +583,385 @@ HOME = /home/user
 
 <div class="card">
 
-<h2>Why are they used?</h2>
+<h3>
 
-<ul style="padding-left:20px;line-height:2;">
+📚 Think of it as Labeled Boxes
 
-<li>Store system settings</li>
+</h3>
 
-<li>Store user information</li>
+<p>
 
-<li>Locate software</li>
+Imagine your computer keeps many labeled storage boxes.
 
-<li>Share configuration between programs</li>
+Each box has a label (Variable Name) and stores useful information (Value).
 
-</ul>
+Whenever a program needs information, it simply opens the correct box.
+
+</p>
+
+<div class="illustration">
+
+<div class="envBox">
+
+<h4>HOME</h4>
+
+<span>/Users/Sai</span>
+
+</div>
+
+<div class="arrow">
+
+➡
+
+</div>
+
+<div class="envBox">
+
+<h4>Program</h4>
+
+<span>Reads Value</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTINUE IN PART 2 --><section class="section">
+
+<div class="title">
+
+<h2>
+
+⚙️ How Environment Variables Work
+
+</h2>
+
+<p>
+
+Every program follows the same simple process.
+
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>How It Works</h3>
+
+<div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:20px;margin-top:20px;">
+
+<div class="envBox">
+
+<h4>Create</h4>
+
+<span>USERNAME</span>
+
+</div>
+
+<div class="arrow">➡</div>
+
+<div class="envBox">
+
+<h4>Store</h4>
+
+<span>Name + Value</span>
+
+</div>
+
+<div class="arrow">➡</div>
+
+<div class="envBox">
+
+<h4>Program</h4>
+
+<span>Reads Value</span>
+
+</div>
+
+<div class="arrow">➡</div>
+
+<div class="envBox">
+
+<h4>Output</h4>
+
+<span>Uses Value</span>
+
+</div>
+
+</div>
 
 </div>
 
 <div class="card">
 
-<h2>Common Variables</h2>
+<h3>Runtime Replacement</h3>
 
-<table>
+<p>
 
-<tr><th>Variable</th><th>Purpose</th></tr>
+When a program starts, it checks whether an environment variable exists.
 
-<tr><td>HOME</td><td>User Home Folder</td></tr>
+If it finds the variable, it replaces the variable name with its value.
 
-<tr><td>PATH</td><td>Command Search Path</td></tr>
+</p>
 
-<tr><td>USER</td><td>Current User</td></tr>
+<div class="keyValue">
 
-<tr><td>PWD</td><td>Current Directory</td></tr>
+<div class="key">
 
-<tr><td>SHELL</td><td>Current Shell</td></tr>
+$HOME
 
-</table>
+</div>
+
+<div class="equal">
+
+➡
+
+</div>
+
+<div class="value">
+
+/Users/Sai
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="title">
+
+<h2>
+
+💡 Practical Examples
+
+</h2>
+
+<p>
+
+Two of the most commonly used Environment Variables.
+
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>📦 PATH Variable</h3>
+
+<p>
+
+PATH stores the locations where the operating system searches for programs.
+
+Instead of searching the whole computer, it checks only these folders.
+
+</p>
+
+<div style="margin-top:30px;text-align:center;font-size:22px;line-height:2.2;font-weight:bold;">
+
+Chrome
+
+<br>
+
+⬇
+
+<br>
+
+PATH
+
+<br>
+
+⬇
+
+<br>
+
+Find Chrome.exe
+
+<br>
+
+⬇
+
+<br>
+
+Launch Program
+
+</div>
 
 </div>
 
 <div class="card">
 
-<h2>View Variables</h2>
+<h3>☕ JAVA_HOME</h3>
+
+<p>
+
+JAVA_HOME stores the location of the Java installation.
+
+Programs automatically use this location whenever Java is required.
+
+</p>
+
+<div style="margin-top:30px;text-align:center;font-size:22px;line-height:2.2;font-weight:bold;">
+
+JAVA_HOME
+
+<br>
+
+⬇
+
+<br>
+
+Java Installation Folder
+
+<br>
+
+⬇
+
+<br>
+
+Java Program Starts
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="title">
+
+<h2>
+
+💻 Common Commands
+
+</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Linux / macOS</h3>
 
 <pre>
 
-printenv
-
 env
+
+printenv
 
 echo $HOME
 
 echo $PATH
 
+echo $USER
+
 </pre>
 
 </div>
 
 <div class="card">
 
-<h2>Create Variable</h2>
+<h3>Windows</h3>
 
 <pre>
 
-name="OpenAI"
+set
 
-echo $name
+echo %PATH%
 
-export name
+echo %USERNAME%
+
+set PATH
 
 </pre>
 
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTINUE IN PART 3 --><section class="section">
+
+<div class="title">
+
+<h2>
+
+🛠 Temporary & Permanent Variables
+
+</h2>
+
 <p>
 
-Use <b>export</b> to make the variable available to child processes.
+Temporary variables exist only for the current terminal session. Permanent variables remain available even after restarting the terminal.
 
 </p>
 
 </div>
 
+<div class="grid">
+
 <div class="card">
 
-<h2>PATH Variable</h2>
+<h3>⏳ Temporary Variables</h3>
 
-<p>
-
-<b>PATH</b> tells Linux where to search for executable programs.
-
-</p>
+<p>Create a variable for the current terminal session.</p>
 
 <pre>
 
-echo $PATH
+export my_var=hello
+
+echo $my_var
+
+unset my_var
 
 </pre>
 
-<div class="note">
+<div style="margin-top:25px;text-align:center;font-size:22px;font-weight:bold;line-height:2;">
 
-Directories are separated using <b>:</b>
+Create Variable
+
+<br>
+
+⬇
+
+<br>
+
+Use Variable
+
+<br>
+
+⬇
+
+<br>
+
+Close Terminal
+
+<br>
+
+⬇
+
+<br>
+
+❌ Deleted
 
 </div>
 
@@ -311,39 +969,431 @@ Directories are separated using <b>:</b>
 
 <div class="card">
 
-<h2>Remember</h2>
+<h3>💾 Permanent Variables</h3>
+
+<p>Store variables permanently in system configuration.</p>
+
+<div style="margin-top:20px;line-height:2;font-size:19px;">
+
+<b>Linux / macOS</b>
+
+<pre>
+
+echo $SHELL
+
+vi .zshrc
+
+export JAVA_HOME=...
+
+export PATH=$PATH:$JAVA_HOME/bin
+
+</pre>
+
+<b>Windows</b>
+
+<div style="text-align:center;margin-top:15px;font-weight:bold;">
+
+System Properties
+
+<br>⬇<br>
+
+Environment Variables
+
+<br>⬇<br>
+
+New / Edit
+
+<br>⬇<br>
+
+Restart Terminal
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="title">
+
+<h2>
+
+📋 Common Environment Variables
+
+</h2>
+
+</div>
+
+<div class="card">
 
 <table>
 
-<tr><th>Command</th><th>Purpose</th></tr>
+<tr>
 
-<tr><td>printenv</td><td>Display Variables</td></tr>
+<th>Variable</th>
 
-<tr><td>env</td><td>List Variables</td></tr>
+<th>Purpose</th>
 
-<tr><td>echo $HOME</td><td>Show Home Folder</td></tr>
+</tr>
 
-<tr><td>echo $PATH</td><td>Show PATH</td></tr>
+<tr>
 
-<tr><td>export</td><td>Create/Export Variable</td></tr>
+<td>PATH</td>
+
+<td>Search executable programs</td>
+
+</tr>
+
+<tr>
+
+<td>HOME</td>
+
+<td>User Home Directory</td>
+
+</tr>
+
+<tr>
+
+<td>USER</td>
+
+<td>Current User</td>
+
+</tr>
+
+<tr>
+
+<td>USERNAME</td>
+
+<td>Windows Username</td>
+
+</tr>
+
+<tr>
+
+<td>JAVA_HOME</td>
+
+<td>Java Installation Path</td>
+
+</tr>
+
+<tr>
+
+<td>TEMP / TMP</td>
+
+<td>Temporary Files</td>
+
+</tr>
+
+<tr>
+
+<td>ANDROID_HOME</td>
+
+<td>Android SDK Location</td>
+
+</tr>
+
+<tr>
+
+<td>PYTHONPATH</td>
+
+<td>Python Module Search Path</td>
+
+</tr>
 
 </table>
 
 </div>
 
+</section>
+
+<section class="section">
+
+<div class="title">
+
+<h2>
+
+💡 Good to Know
+
+</h2>
+
 </div>
 
-<footer>
+<div class="grid">
 
-Environment Variables Presentation
+<div class="card">
+
+<h3>Linux vs Windows</h3>
+
+<table>
+
+<tr>
+
+<th>Linux / macOS</th>
+
+<th>Windows</th>
+
+</tr>
+
+<tr>
+
+<td>$PATH</td>
+
+<td>%PATH%</td>
+
+</tr>
+
+<tr>
+
+<td>printenv / env</td>
+
+<td>set</td>
+
+</tr>
+
+<tr>
+
+<td>Path Separator : <b>:</b></td>
+
+<td>Path Separator : <b>;</b></td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h3>⭐ Remember</h3>
+
+<ul style="padding-left:20px;line-height:2;font-size:18px;">
+
+<li>Environment Variable = Name + Value</li>
+
+<li>Programs read values at runtime.</li>
+
+<li>PATH stores executable locations.</li>
+
+<li>Temporary variables disappear after closing the terminal.</li>
+
+<li>Permanent variables remain after restart.</li>
+
+<li>Use <b>env</b>, <b>printenv</b> or <b>set</b> to list variables.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTINUE IN PART 4 --><section class="section">
+
+<div class="title">
+
+<h2>
+
+🔍 How PATH Finds a Program
+
+</h2>
+
+<p>
+
+When you run a command, the operating system searches the folders listed in the PATH variable.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<div style="display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;margin:30px 0;">
+
+<div class="envBox">
+<h4>chrome</h4>
+<span>User Command</span>
+</div>
+
+<div class="arrow">➡</div>
+
+<div class="envBox">
+<h4>PATH</h4>
+<span>Checks Folders</span>
+</div>
+
+<div class="arrow">➡</div>
+
+<div class="envBox">
+<h4>chrome.exe</h4>
+<span>Found</span>
+</div>
+
+<div class="arrow">➡</div>
+
+<div class="envBox">
+<h4>Run</h4>
+<span>Application Opens</span>
+</div>
+
+</div>
+
+<div class="note">
+
+If the executable is not found in any PATH directory, the system reports:
+
+<br><br>
+
+<b>Windows:</b> <i>'command' is not recognized...</i>
+
+<br>
+
+<b>Linux/macOS:</b> <i>command not found</i>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="title">
+
+<h2>
+
+📂 TEMP Environment Variable
+
+</h2>
+
+<p>
+
+The TEMP variable stores temporary files created by applications.
+
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Windows</h3>
+
+<pre>
+
+echo %TEMP%
+
+%temp%
+
+</pre>
+
+</div>
+
+<div class="card">
+
+<h3>Linux / macOS</h3>
+
+<pre>
+
+echo $TMPDIR
+
+/tmp
+
+</pre>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="title">
+
+<h2>
+
+🎯 Summary
+
+</h2>
+
+</div>
+
+<div class="card">
+
+<div style="font-size:20px;line-height:2.2;">
+
+✅ Environment Variable = Name + Value
+
+<br>
+
+✅ Programs read values while running
+
+<br>
+
+✅ PATH stores executable locations
+
+<br>
+
+✅ HOME stores the user folder
+
+<br>
+
+✅ JAVA_HOME stores Java installation
+
+<br>
+
+✅ Temporary variables disappear after terminal closes
+
+<br>
+
+✅ Permanent variables remain after restart
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer style="
+
+margin-top:80px;
+padding:50px;
+text-align:center;
+background:white;
+border-top:4px solid #8b5e3c;
+
+">
+
+<h2 style="color:#6b4226;margin-bottom:15px;">
+
+🎉 Thank You
+
+</h2>
+
+<p style="font-size:20px;">
+
+Environment Variables Presentation Completed
+
+</p>
 
 </footer>
+
 
 <script>
 
 const cards=document.querySelectorAll(".card");
 
-const observer=new IntersectionObserver(entries=>{
+const observer=new IntersectionObserver((entries)=>{
 
 entries.forEach(entry=>{
 
@@ -359,25 +1409,63 @@ entry.target.classList.add("show");
 
 cards.forEach(card=>observer.observe(card));
 
+
+// Hover Animation
+
 cards.forEach(card=>{
 
 card.addEventListener("mouseenter",()=>{
 
-card.style.transform="translateY(-8px) scale(1.02)";
+card.style.transform="translateY(-10px) scale(1.02)";
 
 });
 
 card.addEventListener("mouseleave",()=>{
 
-if(card.classList.contains("show"))
+if(card.classList.contains("show")){
 
 card.style.transform="translateY(0) scale(1)";
 
+}
+
 });
 
 });
+
+
+// Floating Animation
+
+document.querySelectorAll(".envBox").forEach((box,index)=>{
+
+box.animate([
+
+{transform:"translateY(0px)"},
+
+{transform:"translateY(-8px)"},
+
+{transform:"translateY(0px)"}
+
+],{
+
+duration:2500+(index*250),
+
+iterations:Infinity
+
+});
+
+});
+
+
+// Hero Button
+
+document.getElementById("nextBtn").onclick=()=>{
+
+alert("🎉 Congratulations!\n\nYou have completed the Fundamentals of Computing Presentation.");
+
+};
 
 </script>
 
 </body>
+
 </html>
